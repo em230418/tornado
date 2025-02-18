@@ -113,8 +113,6 @@ class StackContext(object):
     and not necessary in most applications.
     """
     def __init__(self, context_factory):
-        warnings.warn("StackContext is deprecated and will be removed in Tornado 6.0",
-                      DeprecationWarning)
         self.context_factory = context_factory
         self.contexts = []
         self.active = True
@@ -193,9 +191,7 @@ class ExceptionStackContext(object):
     def __init__(self, exception_handler, delay_warning=False):
         self.delay_warning = delay_warning
         if not self.delay_warning:
-            warnings.warn(
-                "StackContext is deprecated and will be removed in Tornado 6.0",
-                DeprecationWarning)
+            pass
         self.exception_handler = exception_handler
         self.active = True
 
@@ -205,9 +201,7 @@ class ExceptionStackContext(object):
     def exit(self, type, value, traceback):
         if type is not None:
             if self.delay_warning:
-                warnings.warn(
-                    "StackContext is deprecated and will be removed in Tornado 6.0",
-                    DeprecationWarning)
+                pass
             return self.exception_handler(type, value, traceback)
 
     def __enter__(self):

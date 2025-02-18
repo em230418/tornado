@@ -28,6 +28,7 @@ import datetime
 import email.utils
 import numbers
 import re
+import sys
 import time
 import unicodedata
 import warnings
@@ -46,6 +47,11 @@ else:
     from urllib import urlencode
     from urlparse import urlparse, urlunparse, parse_qsl
 
+
+if sys.version_info >= (3, 9):
+    from collections.abc import MutableMapping
+else:
+    from collections import MutableMapping
 
 # responses is unused in this file, but we re-export it to other files.
 # Reference it so pyflakes doesn't complain.
@@ -104,7 +110,7 @@ class _NormalizedHeaderCache(dict):
 _normalized_headers = _NormalizedHeaderCache(1000)
 
 
-class HTTPHeaders(collections.MutableMapping):
+class HTTPHeaders(MutableMapping):
     """A dictionary that maintains ``Http-Header-Case`` for all keys.
 
     Supports multiple values per key via a pair of new methods,

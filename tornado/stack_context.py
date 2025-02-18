@@ -113,8 +113,6 @@ class StackContext(object):
     and not necessary in most applications.
     """
     def __init__(self, context_factory):
-        warnings.warn("StackContext is deprecated and will be removed in Tornado 6.0",
-                      DeprecationWarning)
         self.context_factory = context_factory
         self.contexts = []
         self.active = True
